@@ -37,6 +37,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   rive: ^0.12.3
   carbon_icons: ^0.0.1+2
+  font_awesome_flutter: ^10.6.0
 
 dev_dependencies:
   flutter_test:
