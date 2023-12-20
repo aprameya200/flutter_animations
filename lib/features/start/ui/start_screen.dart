@@ -85,11 +85,7 @@ class _StartPageState extends State<StartPage> {
                   Container(
                       height: screenHeight * 0.085,
                       width: screenWidth * 1.6,
-                      child: SignInDialogBox(
-                        btnAnimationController: _btnAnimationController,
-                        screenHeight: screenHeight,
-                        screenWidth: screenWidth,
-                      )),
+                      child: SignInDialogBox(btnAnimationController: _btnAnimationController, screenHeight: screenHeight, screenWidth: screenWidth,)),
                   SizedBox(
                     height: 20,
                   ),

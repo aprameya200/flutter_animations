@@ -271,6 +271,9 @@ class SignInBox extends StatelessWidget {
                 SizedBox(
                   height: screenHeight * 0.01,
                 ),
+                /**
+                 * Sign in options
+                 */
                 Row(
                   mainAxisAlignment:
                   MainAxisAlignment
