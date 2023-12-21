@@ -33,7 +33,7 @@ class _StartPageState extends State<StartPage> {
     double screenWidth = MediaQuery.of(context).size.width;
 
     SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
-        systemNavigationBarColor: Colors.transparent,
+        systemNavigationBarColor: Colors.white,
         statusBarIconBrightness: Brightness.dark,
         statusBarColor: Colors.transparent));
 
@@ -71,14 +71,14 @@ class _StartPageState extends State<StartPage> {
                         fontFamily: 'Poppins',
                         fontWeight: FontWeight.w900),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
                   Text(
                     "Design is a multifaceted discipline that encompasses the thoughtful creation and arrangement of elements to achieve.",
                     style: TextStyle(fontSize: screenHeight * 0.017),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 20,
                   ),
                   Spacer(),
@@ -86,7 +86,7 @@ class _StartPageState extends State<StartPage> {
                       height: screenHeight * 0.085,
                       width: screenWidth * 1.6,
                       child: SignInDialogBox(btnAnimationController: _btnAnimationController, screenHeight: screenHeight, screenWidth: screenWidth,)),
-                  SizedBox(
+                  const SizedBox(
                     height: 20,
                   ),
                   Padding(

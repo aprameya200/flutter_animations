@@ -14,7 +14,7 @@ class StartCourseButton extends StatelessWidget {
       //adding controller to animate
       RiveAnimation.asset(
         "assets/RiveAnimations/button.riv",
-        controllers: [btnAnimationController],
+        controllers: [btnAnimationController], //controller for this animation
       ),
       Positioned.fill(
           top: screenHeight * 0.01,
