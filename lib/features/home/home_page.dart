@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_animations/data.dart';
 import 'package:flutter_animations/features/home/bottom_navigation_bar.dart';
+import 'package:flutter_animations/features/home/menu_button_widget.dart';
 import 'package:flutter_animations/utils/rive_asset.dart';
 import 'package:flutter_animations/utils/rive_utils.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
@@ -27,7 +28,9 @@ class _HomePageState extends State<HomePage> {
     double screenHeight = MediaQuery.of(context).size.height;
     double screenWidth = MediaQuery.of(context).size.width;
 
-    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+    late SMIBool isMenuOpen;
+
+    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
         systemNavigationBarColor: Colors.white,
         statusBarColor: Color(0xFF213555)));
 
@@ -51,7 +54,7 @@ class _HomePageState extends State<HomePage> {
                         child: Lottie.asset('assets/plant.json',
                             height: screenHeight * 0.019)),
                     Positioned(
-                      top: 30,
+                      top: 45,
                       left: 50,
                       right: 90,
                       child: Container(
@@ -79,6 +82,8 @@ class _HomePageState extends State<HomePage> {
                             EdgeInsets.symmetric(vertical: 6, horizontal: 20)),
                       ),
                     ),
+                    MenuButtonWidget(),
+
                   ],
                 ),
               ),
@@ -89,29 +94,55 @@ class _HomePageState extends State<HomePage> {
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 18.0),
                     child: Container(
-                      padding: EdgeInsets.only(top: 20,bottom: 120),
+                      padding: EdgeInsets.only(top: 20, bottom: 120),
                       height: screenHeight * 0.7,
                       width: screenWidth,
                       color: Colors.transparent,
-                      child: StaggeredGridView.countBuilder( //each item is list can have different size
+                      child: StaggeredGridView.countBuilder(
+                        //each item is list can have different size
                         //controller: _scrollController,
                         physics: const BouncingScrollPhysics(),
                         crossAxisCount: 2,
                         itemCount: CourseTopics.allTopics.length,
                         itemBuilder: (BuildContext context, int index) {
                           return Padding(
-                            padding: index == 1 ? EdgeInsets.only(top: 60,left: 12,right: 12,bottom: 12) : EdgeInsets.only(top: 10,left: 12,right: 4,bottom: 12) ,
+                            padding: index == 1
+                                ? EdgeInsets.only(
+                                    top: 60, left: 12, right: 12, bottom: 12)
+                                : EdgeInsets.only(
+                                    top: 10, left: 12, right: 4, bottom: 12),
                             child: Card(
                               color: Colors.white,
                               elevation: 3,
                               child: Center(
                                 child: Padding(
-                                  padding: const EdgeInsets.symmetric(horizontal: 24.0,vertical: 12),
-                                  child: Column(mainAxisAlignment: MainAxisAlignment.spaceBetween,crossAxisAlignment: CrossAxisAlignment.start,children: [
-                                    Image.asset("assets/${CourseTopics.allTopics[index].imageName}",height: screenHeight * 0.13,width: screenWidth * 0.25,),
-                                    AutoSizeText(CourseTopics.allTopics[index].topicName,style: TextStyle(fontFamily: "Poppins",fontSize: screenHeight * 0.03),maxLines: 1,),
-                                    Text("12 Courses",style: TextStyle(fontFamily: "Poppins",fontSize: 13,color: Colors.black54))
-                                  ],),
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 24.0, vertical: 12),
+                                  child: Column(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Image.asset(
+                                        "assets/${CourseTopics.allTopics[index].imageName}",
+                                        height: screenHeight * 0.13,
+                                        width: screenWidth * 0.25,
+                                      ),
+                                      AutoSizeText(
+                                        CourseTopics.allTopics[index].topicName,
+                                        style: TextStyle(
+                                            fontFamily: "Poppins",
+                                            fontSize: screenHeight * 0.03),
+                                        maxLines: 1,
+                                      ),
+                                      Text("12 Courses",
+                                          style: TextStyle(
+                                              fontFamily: "Poppins",
+                                              fontSize: 13,
+                                              color: Colors.black54))
+                                    ],
+                                  ),
                                 ),
                               ),
                             ),

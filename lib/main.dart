@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animations/features/home/home_page.dart';
+import 'package:flutter_animations/features/menu/side_menu.dart';
 import 'package:flutter_animations/features/start/ui/start_screen.dart';
 
 void main() {

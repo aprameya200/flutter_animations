@@ -27,3 +27,18 @@ List<RiveAsset> bottomNavs = [
   RiveAsset("assets/RiveAnimations/animated_set.riv",artboard: 'CHAT', stateMachineName: 'CHAT_Interactivity', title: 'Chat'),
 ];
 
+
+List<RiveAsset> sideNavs = [
+  RiveAsset("assets/RiveAnimations/animated_set.riv",artboard: 'HOME', stateMachineName: 'HOME_interactivity', title: 'Home'),
+  RiveAsset("assets/RiveAnimations/animated_set.riv",artboard: 'USER', stateMachineName: 'USER_Interactivity', title: 'User'),
+  RiveAsset("assets/RiveAnimations/animated_set.riv",artboard: 'CHAT', stateMachineName: 'CHAT_Interactivity', title: 'Chat'),
+  RiveAsset("assets/RiveAnimations/animated_set.riv",artboard: 'SEARCH', stateMachineName: 'SEARCH_Interactivity', title: 'Search'),
+  RiveAsset("assets/RiveAnimations/animated_set.riv",artboard: 'SETTINGS', stateMachineName: 'SETTINGS_Interactivity', title: 'Settings'),
+];
+
+List<RiveAsset> historyItems = [
+  RiveAsset("assets/RiveAnimations/animated_set.riv",artboard: 'BELL', stateMachineName: 'BELL_Interactivity', title: 'Notifications'),
+  RiveAsset("assets/RiveAnimations/animated_set.riv",artboard: 'TIMER', stateMachineName: 'TIMER_Interactivity', title: 'History'),
+
+];
+
