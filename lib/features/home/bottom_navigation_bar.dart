@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:rive/rive.dart';
 
+import '../../constants.dart';
 import '../../utils/rive_asset.dart';
 import '../../utils/rive_utils.dart';
 
@@ -22,13 +24,15 @@ class _AnimatedBottomNavigationBarState extends State<AnimatedBottomNavigationBa
 
   @override
   Widget build(BuildContext context) {
+
+
     return SafeArea(
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 15,vertical: 4),
           child: Container(
               padding: EdgeInsets.all(8),
               decoration: BoxDecoration(
-                  color: Color(0xFF213555),
+                  color: bannerAndMenu,
                   borderRadius: BorderRadius.circular(18)),
               height: 70,
               child: Row(

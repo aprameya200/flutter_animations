@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_animations/features/menu/info_card.dart';
 import 'package:rive/rive.dart';
 
+import '../../constants.dart';
 import '../../utils/rive_asset.dart';
 import '../../utils/rive_utils.dart';
 
@@ -20,17 +21,13 @@ class _SideMenuState extends State<SideMenu> {
 
   @override
   Widget build(BuildContext context) {
+
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
 
-    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
-        statusBarColor: Colors.transparent,
-        statusBarIconBrightness: Brightness.dark,
-        systemNavigationBarColor: Colors.transparent));
-
     return Scaffold(
       body: Container(
-        color: Color(0xFF213555),
+        color: darkBlue,
         width: screenWidth * 0.7,
         height: double.infinity,
         child: SafeArea(
@@ -39,7 +36,7 @@ class _SideMenuState extends State<SideMenu> {
             children: [
               InfoCard(),
               const Padding(
-                padding: EdgeInsets.only(left: 20,top: 20, bottom: 15),
+                padding: EdgeInsets.only(left: 20, top: 20, bottom: 15),
                 child: Text(
                   "BROWSE",
                   style: TextStyle(
@@ -54,7 +51,9 @@ class _SideMenuState extends State<SideMenu> {
                 // height: 1,
                 width: screenWidth * 0.9,
               ),
-              SizedBox(height: 20,),
+              SizedBox(
+                height: 20,
+              ),
               ...List.generate(
                 //feeds into the list as row children
                 sideNavs.length,
@@ -75,18 +74,21 @@ class _SideMenuState extends State<SideMenu> {
                           .change(false); //stops the animation
                     });
                   },
-                  child: Container(color: Colors.transparent, //to increase the width since it wont touch
+                  child: Container(
+                    color: Colors.transparent,
+                    //to increase the width since it wont touch
                     child: Stack(
                       children: [
                         AnimatedPositioned(
                             height: screenHeight * 0.075,
                             width: sideNavs[index] == selectedsideNav
-                                ? screenWidth * 0.7
+                                ? screenWidth * 0.6
                                 : 0,
                             child: Container(
                               decoration: BoxDecoration(
-                                  color: Colors.blue,
-                                  borderRadius: BorderRadius.circular(20)),
+                                borderRadius: BorderRadius.circular(12),
+                                color: bannerAndMenu,
+                              ),
                             ),
                             duration: Duration(milliseconds: 200)),
                         Padding(
@@ -131,7 +133,7 @@ class _SideMenuState extends State<SideMenu> {
                           ),
                         ),
                         Container(
-                          color: Colors.white10,
+                          color: transparentWhite,
                           height: 1,
                           width: screenWidth * 0.9,
                         ),
@@ -139,87 +141,9 @@ class _SideMenuState extends State<SideMenu> {
                     ),
                   ),
                 ),
-                //     Column(
-                //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                //   crossAxisAlignment: CrossAxisAlignment.start,
-                //   children: [
-                //     GestureDetector(
-                //       onTap: () {
-                //         // starts the animation
-                //         if (sideNavs[index] != selectedsideNav) {
-                //           sideNavs[index].input!.change(true);
-                //
-                //           setState(() {
-                //             prevAsset = selectedsideNav;
-                //             selectedsideNav = sideNavs[index];
-                //           });
-                //         }
-                //         Future.delayed(Duration(milliseconds: 500))
-                //             .then((value) {
-                //           sideNavs[index]
-                //               .input!
-                //               .change(false); //stops the animation
-                //         });
-                //       },
-                //       child: Column(
-                //         children: [
-                //           Padding(
-                //             padding:
-                //                 const EdgeInsets.symmetric(horizontal: 18.0),
-                //             child: Row(
-                //               crossAxisAlignment: CrossAxisAlignment.center,
-                //               children: [
-                //                 Container(
-                //                   height: screenHeight * 0.075,
-                //                   width: screenWidth * 0.1,
-                //                   child: Padding(
-                //                     padding: const EdgeInsets.all(2.0),
-                //                     child: RiveAnimation.asset(
-                //                       sideNavs.first.src,
-                //                       //asset source string
-                //                       artboard: sideNavs[index].artboard,
-                //                       //initial artboard to be displayed i.i  te icon
-                //                       onInit: (artboard) {
-                //                         //called when animation is ready to be displayed
-                //                         StateMachineController controller =
-                //                             RiveUtils.getRiveController(
-                //                                 artboard,
-                //                                 stateMachineName:
-                //                                     sideNavs[index]
-                //                                         .stateMachineName);
-                //                         sideNavs[index].input = controller
-                //                                 .findSMI("active")
-                //                             as SMIBool; //finds the instance of SMI
-                //                       },
-                //                     ),
-                //                   ),
-                //                 ),
-                //                 const SizedBox(
-                //                   width: 15,
-                //                 ),
-                //                 Text(
-                //                   sideNavs[index].title,
-                //                   style: TextStyle(
-                //                       color: Colors.white,
-                //                       fontSize: 15,
-                //                       fontFamily: "Poppins"),
-                //                 ),
-                //               ],
-                //             ),
-                //           ),
-                //           Container(
-                //             color: Colors.white10,
-                //             height: 1,
-                //             width: screenWidth * 0.9,
-                //           ),
-                //         ],
-                //       ),
-                //     ),
-                //   ],
-                // ),
               ),
               const Padding(
-                padding: EdgeInsets.only(left: 20,top: 20, bottom: 5),
+                padding: EdgeInsets.only(left: 20, top: 20, bottom: 5),
                 child: Text(
                   "HISTORY",
                   style: TextStyle(
@@ -237,7 +161,7 @@ class _SideMenuState extends State<SideMenu> {
               ...List.generate(
                 //feeds into the list as row children
                 historyItems.length,
-                    (index) => GestureDetector(
+                (index) => GestureDetector(
                   onTap: () {
                     // starts the animation
                     if (historyItems[index] != selectedsideNav) {
@@ -254,18 +178,20 @@ class _SideMenuState extends State<SideMenu> {
                           .change(false); //stops the animation
                     });
                   },
-                  child: Container(color: Colors.transparent, //to increase the width since it wont touch
+                  child: Container(
+                    color: Colors.transparent,
+                    //to increase the width since it wont touch
                     child: Stack(
                       children: [
                         AnimatedPositioned(
-                            height: screenHeight * 0.075,
+                            height: screenHeight * 0.07,
                             width: historyItems[index] == selectedsideNav
-                                ? screenWidth * 0.7
+                                ? screenWidth * 0.6
                                 : 0,
                             child: Container(
                               decoration: BoxDecoration(
-                                  color: Colors.blue,
-                                  borderRadius: BorderRadius.circular(20)),
+                                  color: bannerAndMenu,
+                                  borderRadius: BorderRadius.circular(12)),
                             ),
                             duration: Duration(milliseconds: 200)),
                         Padding(
@@ -286,12 +212,13 @@ class _SideMenuState extends State<SideMenu> {
                                     onInit: (artboard) {
                                       //called when animation is ready to be displayed
                                       StateMachineController controller =
-                                      RiveUtils.getRiveController(artboard,
-                                          stateMachineName: historyItems[index]
-                                              .stateMachineName);
+                                          RiveUtils.getRiveController(artboard,
+                                              stateMachineName:
+                                                  historyItems[index]
+                                                      .stateMachineName);
                                       historyItems[index].input = controller
-                                          .findSMI("active")
-                                      as SMIBool; //finds the instance of SMI
+                                              .findSMI("active")
+                                          as SMIBool; //finds the instance of SMI
                                     },
                                   ),
                                 ),
@@ -310,7 +237,7 @@ class _SideMenuState extends State<SideMenu> {
                           ),
                         ),
                         Container(
-                          color: Colors.white10,
+                          color: transparentWhite,
                           height: 1,
                           width: screenWidth * 0.9,
                         ),
@@ -318,86 +245,7 @@ class _SideMenuState extends State<SideMenu> {
                     ),
                   ),
                 ),
-                //     Column(
-                //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                //   crossAxisAlignment: CrossAxisAlignment.start,
-                //   children: [
-                //     GestureDetector(
-                //       onTap: () {
-                //         // starts the animation
-                //         if (sideNavs[index] != selectedsideNav) {
-                //           sideNavs[index].input!.change(true);
-                //
-                //           setState(() {
-                //             prevAsset = selectedsideNav;
-                //             selectedsideNav = sideNavs[index];
-                //           });
-                //         }
-                //         Future.delayed(Duration(milliseconds: 500))
-                //             .then((value) {
-                //           sideNavs[index]
-                //               .input!
-                //               .change(false); //stops the animation
-                //         });
-                //       },
-                //       child: Column(
-                //         children: [
-                //           Padding(
-                //             padding:
-                //                 const EdgeInsets.symmetric(horizontal: 18.0),
-                //             child: Row(
-                //               crossAxisAlignment: CrossAxisAlignment.center,
-                //               children: [
-                //                 Container(
-                //                   height: screenHeight * 0.075,
-                //                   width: screenWidth * 0.1,
-                //                   child: Padding(
-                //                     padding: const EdgeInsets.all(2.0),
-                //                     child: RiveAnimation.asset(
-                //                       sideNavs.first.src,
-                //                       //asset source string
-                //                       artboard: sideNavs[index].artboard,
-                //                       //initial artboard to be displayed i.i  te icon
-                //                       onInit: (artboard) {
-                //                         //called when animation is ready to be displayed
-                //                         StateMachineController controller =
-                //                             RiveUtils.getRiveController(
-                //                                 artboard,
-                //                                 stateMachineName:
-                //                                     sideNavs[index]
-                //                                         .stateMachineName);
-                //                         sideNavs[index].input = controller
-                //                                 .findSMI("active")
-                //                             as SMIBool; //finds the instance of SMI
-                //                       },
-                //                     ),
-                //                   ),
-                //                 ),
-                //                 const SizedBox(
-                //                   width: 15,
-                //                 ),
-                //                 Text(
-                //                   sideNavs[index].title,
-                //                   style: TextStyle(
-                //                       color: Colors.white,
-                //                       fontSize: 15,
-                //                       fontFamily: "Poppins"),
-                //                 ),
-                //               ],
-                //             ),
-                //           ),
-                //           Container(
-                //             color: Colors.white10,
-                //             height: 1,
-                //             width: screenWidth * 0.9,
-                //           ),
-                //         ],
-                //       ),
-                //     ),
-                //   ],
-                // ),
               ),
-
             ],
           ),
         ), // Set height to cover top to bottom

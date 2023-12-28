@@ -5,7 +5,9 @@ import 'package:rive/rive.dart';
 import '../../utils/rive_utils.dart';
 
 class MenuButtonWidget extends StatefulWidget {
-  MenuButtonWidget({super.key});
+  MenuButtonWidget({super.key, required this.pressToOpen});
+
+  final Function pressToOpen;
 
   @override
   State<MenuButtonWidget> createState() => _MenuButtonWidgetState();
@@ -18,7 +20,8 @@ class _MenuButtonWidgetState extends State<MenuButtonWidget> {
   @override
   Widget build(BuildContext context) {
     return Positioned(
-        left: 5,
+        left: 0,
+        top: 50,
         child: Container(
           decoration: const BoxDecoration(
               color: Colors.white,
@@ -31,15 +34,14 @@ class _MenuButtonWidgetState extends State<MenuButtonWidget> {
                     offset: Offset(0, 20),
                     blurRadius: 10)
               ]),
-          height: 70,
+          height: 45,
           width: 50,
           child: GestureDetector(
             onTap: () {
               isMenuOpen.value = !isMenuOpen.value;
+              widget.pressToOpen();
             },
-            child:
-            // Container(color: Colors.purple,height: 60,width: 200,child: Text("Hwlooo")),
-            RiveAnimation.asset(
+            child: RiveAnimation.asset(
               "assets/RiveAnimations/menu_button.riv",
               onInit: (artboard) {
                 print(artboard.toString());
