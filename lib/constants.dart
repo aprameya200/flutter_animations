@@ -16,9 +16,11 @@ void changeSystemNavColor(Color color){
   ));
 }
 
-void changeSystemStatusBarColor(Color color){
+void changeSystemUiColor(Color colorNav,Color colorStatus){
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-    statusBarColor: color,
+    statusBarColor: colorStatus,
     statusBarIconBrightness: Brightness.light,
+    systemNavigationBarColor: colorNav
   ));
 }
+

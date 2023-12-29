@@ -5,48 +5,44 @@ import 'package:rive/rive.dart';
 
 import '../../utils/rive_utils.dart';
 
-class MenuButtonWidget extends StatefulWidget {
-  MenuButtonWidget(
+class ExitMenuButtonWidget extends StatefulWidget {
+  ExitMenuButtonWidget(
       {super.key, required this.pressToOpen, required this.menuIsOpen});
 
   final Function pressToOpen;
   final bool menuIsOpen;
 
   @override
-  State<MenuButtonWidget> createState() => _MenuButtonWidgetState();
+  State<ExitMenuButtonWidget> createState() => _ExitMenuButtonWidgetState();
 }
 
-class _MenuButtonWidgetState extends State<MenuButtonWidget> {
+class _ExitMenuButtonWidgetState extends State<ExitMenuButtonWidget> {
   // final VoidCallback press;
   late SMIBool isMenuOpen;
 
   @override
   Widget build(BuildContext context) {
     return AnimatedPositioned(
-        left: widget.menuIsOpen ? 0 : -100,
-        top: widget.menuIsOpen ? 50 : 65,
-        duration: Duration(milliseconds: 300),
-        child: Container(
+        left: widget.menuIsOpen ? 160 : 210,
+        top:  65,
+        duration: Duration(milliseconds: 100),
+        child: AnimatedContainer(
           decoration: BoxDecoration(
-              color: widget.menuIsOpen ? pureWhite : darkBlue,
-              borderRadius: widget.menuIsOpen
-                  ? BorderRadius.only(
-                      topRight: Radius.circular(12),
-                      bottomRight: Radius.circular(12))
-                  : BorderRadius.all(Radius.circular(12)),
+              borderRadius: BorderRadius.all(Radius.circular(12)),
               boxShadow: [
-                widget.menuIsOpen ? BoxShadow(
-                    color: Colors.black54, offset: Offset(0, 10), blurRadius: 8) : BoxShadow(
+                BoxShadow(
                     color: Colors.transparent, offset: Offset(0, 0), blurRadius: 0)
               ]),
           height: 45,
-          width: 50,
+          width: widget.menuIsOpen ? 0 : 50,
+          duration: Duration(milliseconds: 90),
           child: GestureDetector(
             onTap: () {
-              // isMenuOpen.value = !isMenuOpen.value;
-              widget.pressToOpen();
-              },
-            child: RiveAnimation.asset( //learning experience
+              isMenuOpen.value = isMenuOpen.value;
+               widget.pressToOpen();
+            },
+            child:
+            RiveAnimation.asset(
               "assets/RiveAnimations/menu_button.riv",
               onInit: (artboard) {
                 print(artboard.toString());
@@ -56,14 +52,14 @@ class _MenuButtonWidgetState extends State<MenuButtonWidget> {
                 // setState(()
                 //artboard.addController(controller)
                 isMenuOpen = controller.findSMI("isOpen") as SMIBool;
-                isMenuOpen.value = true;
+                isMenuOpen.value = false;
                 if (isMenuOpen != null) {
                   print(isMenuOpen.type.toString());
                   setState(() {
-                    isMenuOpen.value = true;
+                    isMenuOpen.value = false;
                   });
                 }
-
+                ;
               },
             ),
           ),

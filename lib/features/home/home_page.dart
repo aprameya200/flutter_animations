@@ -1,4 +1,3 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -6,6 +5,7 @@ import 'package:flutter_animations/constants.dart';
 import 'package:flutter_animations/data.dart';
 import 'package:flutter_animations/features/home/bottom_navigation_bar.dart';
 import 'package:flutter_animations/features/home/courses_grid.dart';
+import 'package:flutter_animations/features/home/exit_menu_button.dart';
 import 'package:flutter_animations/features/home/home_page_elements.dart';
 import 'package:flutter_animations/features/home/menu_button_widget.dart';
 import 'package:flutter_animations/features/home/top_banner.dart';
@@ -47,14 +47,16 @@ class _HomePageState extends State<HomePage>
       _controller.value == 1.0 ? _controller.reverse() : _controller.forward();
     });
 
-    _controller.value == 1.0 ? changeSystemNavColor(pureWhite) : changeSystemNavColor(darkBlue);
-
+    _controller.value == 1.0
+        ? changeSystemUiColor(pureWhite, bannerAndMenu)
+        : changeSystemUiColor(darkBlue, darkBlue);
   }
+
+  void toggleColor() {}
 
   @override
   void initState() {
     super.initState();
-    changeSystemNavColor(Colors.white);
 
     // Create an OffsetTween from (0, 0) to (100, 100)
     _offsetAnimation = Tween<Offset>(
@@ -75,13 +77,30 @@ class _HomePageState extends State<HomePage>
   Widget build(BuildContext context) {
     double screenHeight = MediaQuery.of(context).size.height;
     double screenWidth = MediaQuery.of(context).size.width;
-
+    double swipeProgress = 0.0;
 
     return Scaffold(
-      // body: Lottie.asset('assets/plant.json'),
+      backgroundColor: darkBlue,
       body: Stack(
         children: [
-          Positioned(child: SideMenu()),
+          /**
+           * Side menu
+           */
+          Positioned(
+              child: GestureDetector(
+                  onHorizontalDragEnd: (details) {
+                    // You can add more logic here based on swipe progress
+                    setState(() {
+                      swipeProgress = 0.0;
+                      _controller.value = 1.0;
+                      openClose();
+                    });
+                  },
+                  child: SideMenu())
+          ),
+          /**
+           * Home Elements
+           */
           Container(
             child: AnimatedBuilder(
               animation: _controller,
@@ -92,15 +111,18 @@ class _HomePageState extends State<HomePage>
                     color: Color(0xFF213555),
                     child: Transform.scale(
                       scale: _scaleAnimation.value,
-                      child: ClipRRect(
-                        borderRadius: isSideMenuClosed
-                            ? BorderRadius.all(Radius.circular(0))
-                            : BorderRadius.all(Radius.circular(20)),
-                        child: Container(
-                          color: Colors.white,
-                          child: HomeElements(
-                            screenHeight: screenHeight,
-                            screenWidth: screenWidth,
+                      child: GestureDetector(
+                        onTap: !isSideMenuClosed ? openClose : null,
+                        child: ClipRRect(
+                          borderRadius: isSideMenuClosed
+                              ? BorderRadius.all(Radius.circular(0))
+                              : BorderRadius.all(Radius.circular(20)),
+                          child: Container(
+                            color: Colors.white,
+                            child: HomeElements(
+                              screenHeight: screenHeight,
+                              screenWidth: screenWidth,
+                            ),
                           ),
                         ),
                       ),
@@ -113,17 +135,26 @@ class _HomePageState extends State<HomePage>
           /**
            * Animated Menu
            */
-          Positioned(
-            bottom: 0,
+          AnimatedPositioned(
+            bottom: isSideMenuClosed ? 0 : -100,
             right: 0,
             left: 0,
+            duration: Duration(milliseconds: 300),
             child: AnimatedBottomNavigationBar(
               screenHeight: screenHeight,
               screenWidth: screenWidth,
             ),
           ),
+          /**
+           * Side Menu Button
+           */
           MenuButtonWidget(
             pressToOpen: openClose,
+            menuIsOpen: isSideMenuClosed,
+          ),
+          ExitMenuButtonWidget(
+            pressToOpen: openClose,
+            menuIsOpen: isSideMenuClosed,
           ),
         ],
       ),

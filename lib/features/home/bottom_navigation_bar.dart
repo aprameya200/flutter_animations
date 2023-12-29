@@ -22,9 +22,9 @@ class _AnimatedBottomNavigationBarState extends State<AnimatedBottomNavigationBa
   RiveAsset selectedBottomNav = bottomNavs[2];
   RiveAsset prevAsset = bottomNavs[2];
 
+
   @override
   Widget build(BuildContext context) {
-
 
     return SafeArea(
         child: Padding(

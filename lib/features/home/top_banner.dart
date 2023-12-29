@@ -41,7 +41,8 @@ class _TopBannerState extends State<TopBanner> {
               child: Text(
                 "Hey, What would you like to learn today ?",
                 style: TextStyle(
-                    color: Colors.white,
+                    // height: 1.3,
+                    color: pureWhite,
                     fontSize: widget.screenHeight * 0.033,
                     fontFamily: "Poppins"),
               ),
