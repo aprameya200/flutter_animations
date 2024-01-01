@@ -29,13 +29,13 @@ class MenuItems extends StatelessWidget {
               width: sideNavs[index] == selectedsideNav
                   ? screenWidth * 0.6
                   : 0,
+              duration: const Duration(milliseconds: 200),
               child: Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(12),
                   color: bannerAndMenu,
                 ),
-              ),
-              duration: Duration(milliseconds: 200)),
+              )),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 18.0),
             child: Row(
@@ -69,7 +69,7 @@ class MenuItems extends StatelessWidget {
                 ),
                 Text(
                   sideNavs[index].title,
-                  style: TextStyle(
+                  style: const TextStyle(
                       color: Colors.white,
                       fontSize: 15,
                       fontFamily: "Poppins"),

@@ -24,7 +24,6 @@ class _CoursesGridState extends State<CoursesGrid> {
     double screenWidth = widget.screenWidth ;
 
     return Positioned(
-        // top: screenHeight * 0.3,
         left: 0,
         right: 0,
         bottom: 0,
@@ -42,50 +41,54 @@ class _CoursesGridState extends State<CoursesGrid> {
               crossAxisCount: 2,
               itemCount: CourseTopics.allTopics.length,
               itemBuilder: (BuildContext context, int index) {
-                return Padding(
-                  padding: index == 1
-                      ? EdgeInsets.only(
-                          top: 60, left: 12, right: 12, bottom: 12)
-                      : EdgeInsets.only(
-                          top: 10, left: 12, right: 4, bottom: 12),
-                  child: Card(
-                    color: Colors.white,
-                    elevation: 3,
-                    child: Center(
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 24.0, vertical: 2),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Image.asset(
-                              "assets/${CourseTopics.allTopics[index].imageName}",
-                              height: screenHeight * 0.13,
-                              width: screenWidth * 0.25,
-                            ),
-                            AutoSizeText(
-                              CourseTopics.allTopics[index].topicName,
-                              style: TextStyle(
-                                  fontFamily: "Poppins",
-                                  fontSize: screenHeight * 0.03),
-                              maxLines: 1,
-                            ),
-                            Text("12 Courses",
-                                style: TextStyle(
-                                    fontFamily: "Poppins",
-                                    fontSize: 13,
-                                    color: Colors.black54))
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                 );
+                return displayCard(index, screenHeight, screenWidth); //display card
               },
               staggeredTileBuilder: (int index) => const StaggeredTile.fit(1),
             ),
           ),
         ));
+  }
+  
+  Widget displayCard(int index,double screenHeight,double screenWidth){
+    return Padding(
+      padding: index == 1
+          ? const EdgeInsets.only(
+          top: 60, left: 12, right: 12, bottom: 12)
+          : const EdgeInsets.only(
+          top: 10, left: 12, right: 4, bottom: 12),
+      child: Card(
+        color: Colors.white,
+        elevation: 3,
+        child: Center(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(
+                horizontal: 24.0, vertical: 2),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Image.asset(
+                  "assets/${CourseTopics.allTopics[index].imageName}",
+                  height: screenHeight * 0.13,
+                  width: screenWidth * 0.25,
+                ),
+                AutoSizeText(
+                  CourseTopics.allTopics[index].topicName,
+                  style: TextStyle(
+                      fontFamily: "Poppins",
+                      fontSize: screenHeight * 0.03),
+                  maxLines: 1,
+                ),
+                const Text("12 Courses",
+                    style: TextStyle(
+                        fontFamily: "Poppins",
+                        fontSize: 13,
+                        color: Colors.black54))
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
   }
 }

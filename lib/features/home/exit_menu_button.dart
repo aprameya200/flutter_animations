@@ -6,7 +6,7 @@ import 'package:rive/rive.dart';
 import '../../utils/rive_utils.dart';
 
 class ExitMenuButtonWidget extends StatefulWidget {
-  ExitMenuButtonWidget(
+  const ExitMenuButtonWidget(
       {super.key, required this.pressToOpen, required this.menuIsOpen});
 
   final Function pressToOpen;
@@ -25,9 +25,9 @@ class _ExitMenuButtonWidgetState extends State<ExitMenuButtonWidget> {
     return AnimatedPositioned(
         left: widget.menuIsOpen ? 160 : 210,
         top:  65,
-        duration: Duration(milliseconds: 100),
+        duration: const Duration(milliseconds: 100),
         child: AnimatedContainer(
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
               borderRadius: BorderRadius.all(Radius.circular(12)),
               boxShadow: [
                 BoxShadow(
@@ -35,7 +35,7 @@ class _ExitMenuButtonWidgetState extends State<ExitMenuButtonWidget> {
               ]),
           height: 45,
           width: widget.menuIsOpen ? 0 : 50,
-          duration: Duration(milliseconds: 90),
+          duration: const Duration(milliseconds: 90),
           child: GestureDetector(
             onTap: () {
               isMenuOpen.value = isMenuOpen.value;
@@ -45,16 +45,13 @@ class _ExitMenuButtonWidgetState extends State<ExitMenuButtonWidget> {
             RiveAnimation.asset(
               "assets/RiveAnimations/menu_button.riv",
               onInit: (artboard) {
-                print(artboard.toString());
                 StateMachineController controller = RiveUtils.getRiveController(
                     artboard,
                     stateMachineName: "State Machine");
                 // setState(()
-                //artboard.addController(controller)
                 isMenuOpen = controller.findSMI("isOpen") as SMIBool;
                 isMenuOpen.value = false;
                 if (isMenuOpen != null) {
-                  print(isMenuOpen.type.toString());
                   setState(() {
                     isMenuOpen.value = false;
                   });

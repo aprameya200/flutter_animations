@@ -9,7 +9,7 @@ class MenuTitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.only(left: 20, top: 20, bottom: 5),
+      padding: const EdgeInsets.only(left: 20, top: 20, bottom: 5),
       child: Text(
         title,
         style: const TextStyle(

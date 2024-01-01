@@ -20,7 +20,7 @@ class _HomeElementsState extends State<HomeElements> {
     double screenHeight = widget.screenHeight;
     double screenWidth = widget.screenWidth;
 
-    return Container(height: screenHeight,width: screenWidth,
+    return SizedBox(height: screenHeight,width: screenWidth,
       child: Stack(children: [
         /**
          * top banner

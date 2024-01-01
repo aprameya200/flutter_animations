@@ -29,7 +29,7 @@ class _HomePageState extends State<HomePage>
     with SingleTickerProviderStateMixin {
   //animation controller for sidemenu navigation
   late final AnimationController _controller = AnimationController(
-    duration: Duration(milliseconds: 220),
+    duration: const Duration(milliseconds: 220),
     vsync: this,
   );
 
@@ -60,8 +60,8 @@ class _HomePageState extends State<HomePage>
 
     // Create an OffsetTween from (0, 0) to (100, 100)
     _offsetAnimation = Tween<Offset>(
-      begin: Offset(0, 0),
-      end: Offset(250, 0),
+      begin: const Offset(0, 0),
+      end: const Offset(250, 0),
     ).animate(_controller);
 
     _scaleAnimation = Tween<double>(
@@ -96,41 +96,39 @@ class _HomePageState extends State<HomePage>
                       openClose();
                     });
                   },
-                  child: SideMenu())
+                  child: const SideMenu())
           ),
           /**
            * Home Elements
            */
-          Container(
-            child: AnimatedBuilder(
-              animation: _controller,
-              builder: (context, child) {
-                return Transform.translate(
-                  offset: _offsetAnimation.value, //maybechange this later
-                  child: Container(
-                    color: Color(0xFF213555),
-                    child: Transform.scale(
-                      scale: _scaleAnimation.value,
-                      child: GestureDetector(
-                        onTap: !isSideMenuClosed ? openClose : null,
-                        child: ClipRRect(
-                          borderRadius: isSideMenuClosed
-                              ? BorderRadius.all(Radius.circular(0))
-                              : BorderRadius.all(Radius.circular(20)),
-                          child: Container(
-                            color: Colors.white,
-                            child: HomeElements(
-                              screenHeight: screenHeight,
-                              screenWidth: screenWidth,
-                            ),
+          AnimatedBuilder(
+            animation: _controller,
+            builder: (context, child) {
+              return Transform.translate(
+                offset: _offsetAnimation.value, //maybechange this later
+                child: Container(
+                  color: darkBlue,
+                  child: Transform.scale(
+                    scale: _scaleAnimation.value,
+                    child: GestureDetector(
+                      onTap: !isSideMenuClosed ? openClose : null,
+                      child: ClipRRect(
+                        borderRadius: isSideMenuClosed
+                            ? const BorderRadius.all(Radius.circular(0))
+                            : const BorderRadius.all(Radius.circular(20)),
+                        child: Container(
+                          color: Colors.white,
+                          child: HomeElements(
+                            screenHeight: screenHeight,
+                            screenWidth: screenWidth,
                           ),
                         ),
                       ),
                     ),
                   ),
-                );
-              },
-            ),
+                ),
+              );
+            },
           ),
           /**
            * Animated Menu
@@ -139,7 +137,7 @@ class _HomePageState extends State<HomePage>
             bottom: isSideMenuClosed ? 0 : -100,
             right: 0,
             left: 0,
-            duration: Duration(milliseconds: 300),
+            duration: const Duration(milliseconds: 300),
             child: AnimatedBottomNavigationBar(
               screenHeight: screenHeight,
               screenWidth: screenWidth,

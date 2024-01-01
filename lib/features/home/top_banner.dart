@@ -21,7 +21,7 @@ class _TopBannerState extends State<TopBanner> {
   @override
   Widget build(BuildContext context) {
 
-    return Container(padding: EdgeInsets.only(top: 42),
+    return Container(padding: const EdgeInsets.only(top: 42),
       height: widget.screenHeight * 0.4,
       width: widget.screenWidth,
       color: bannerAndMenu,
@@ -36,7 +36,7 @@ class _TopBannerState extends State<TopBanner> {
             top: 45,
             left: 50,
             right: 90,
-            child: Container(
+            child: SizedBox(
               width: widget.screenWidth * 0.8,
               child: Text(
                 "Hey, What would you like to learn today ?",
